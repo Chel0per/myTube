@@ -1,25 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {CSSReset} from "./components/CSSReset/CSSReset.js";
+import Header from "./components/Header/index.js";
+import PlaylistView from "./components/PlaylistView/index.js";
+import playlists from "./playlists.json"
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <CSSReset>
+      <Header></Header>
+      <PlaylistView playlists={playlists}></PlaylistView>
+    </CSSReset>  
   );
+
 }
 
 export default App;
