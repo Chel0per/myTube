@@ -1,10 +1,10 @@
 import React from "react";
 import { Container,Title,Videos } from "./styles.js";
 
-const PlaylistContainer = () => {
+const PlaylistContainer = ({title}) => {
     return(
         <Container>
-            <Title></Title>
+            <Title>{title}</Title>
             <Videos></Videos>
         </Container>
     )

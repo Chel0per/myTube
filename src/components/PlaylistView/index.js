@@ -1,5 +1,5 @@
 import React from "react";
-import { Container,Title,Videos } from "./styles";
+import { Container } from "./styles";
 import PlaylistContainer from "../PlaylistContainer/index.js"
 
 const PlaylistView = ({playlists}) => {
@@ -9,10 +9,7 @@ const PlaylistView = ({playlists}) => {
     return <Container>{
         playlistNames.map(function (playlistName) {                
             return(
-                <PlaylistContainer>
-                    <Title>{playlistName}</Title>
-                    <Videos></Videos>
-                </PlaylistContainer>
+                <PlaylistContainer title={playlistName}></PlaylistContainer>                
             )
         }
     )}

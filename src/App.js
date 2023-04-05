@@ -9,7 +9,7 @@ function App() {
     <CSSReset>
       <Header></Header>
       <PlaylistView playlists={playlists}></PlaylistView>
-    </CSSReset>  
+    </CSSReset>
   );
 
 }
