@@ -21,8 +21,10 @@
         "link":"https://www.youtube.com/watch?v=K5QaTfE5ylk"
     }]
     ,
-    "Xadrez":1,
-    "Pra sofrer":1
-
+    "Xadrez":[{
+        "title":"The BEST Beginner Chess Opening",
+        "thumb":"https://img.youtube.com/vi/TemLSMDKSMw/hqdefault.jpg", 
+        "link":"https://www.youtube.com/watch?v=TemLSMDKSMw"       
+    }]
 }
   

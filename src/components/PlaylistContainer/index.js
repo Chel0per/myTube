@@ -1,11 +1,12 @@
 import React from "react";
-import { Container,Title,Videos } from "./styles.js";
+import { Container,Title } from "./styles.js";
+import VideoContainer from "../VideoContainer/index.js"
 
-const PlaylistContainer = ({title}) => {
+const PlaylistContainer = ({title,playlist}) => {
     return(
         <Container>
             <Title>{title}</Title>
-            <Videos></Videos>
+            <VideoContainer playlist={playlist}></VideoContainer>
         </Container>
     )
 }

@@ -7,9 +7,10 @@ const PlaylistView = ({playlists}) => {
     const playlistNames = Object.keys(playlists);
   
     return <Container>{
-        playlistNames.map(function (playlistName) {                
+        playlistNames.map(function (playlistName) { 
+            const playlist = playlists[playlistName];               
             return(
-                <PlaylistContainer title={playlistName}></PlaylistContainer>                
+                <PlaylistContainer title={playlistName} playlist={playlist}></PlaylistContainer>                
             )
         }
     )}
