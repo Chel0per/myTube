@@ -10,9 +10,9 @@ function App() {
 
   useEffect(() => {
     const loadPlaylists = async () => {
-      const response = await fetch("http://localhost:3001");
+      const response = await fetch("http://localhost:3001/getAllItems");
       const result = await response.json();
-      console.log(result)
+      console.log("useEffect Hook activated")
       setPlaylist(result);
     };
     loadPlaylists();

@@ -2,6 +2,7 @@
 
 # dependencies
 backend/express_server/node_modules
+backend/secret.json
 frontend/node_modules
 /.pnp
 .pnp.js

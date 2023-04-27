@@ -5,7 +5,6 @@ const videoSchema = require("./videoSchema.js");
 async function getAllItems () {
 
     await mongoose.connect("mongodb://127.0.0.1:27017/mytubeDB", { useNewUrlParser: true, useUnifiedTopology: true });   
-    console.log('MongoDB connected');
    
     const collectionsName = await getAllCollectionsName();
 

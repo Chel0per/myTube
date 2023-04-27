@@ -1,11 +1,12 @@
 const express = require("express");
-const app = express();
 const cors = require('cors');
-const { getAllItems } = require("../getAllItems");
+const { getAllItems } = require("../getAllItems.js");
+const { linkToObject } = require("../linkToObject.js")
 
+const app = express();
 app.use(cors());
 
-app.get("/",async function(req,res){
+app.get("/getAllItems",async function(req,res){
     
     let playlists = await getAllItems();
     res.send(playlists);

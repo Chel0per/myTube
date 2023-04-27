@@ -1,20 +1,28 @@
-import React from "react";
-import { Container } from "./styles";
+import React, { useState } from "react";
+import { FlexContainer,Container,AddButton } from "./styles.js";
 import PlaylistContainer from "../PlaylistContainer/index.js"
+import AddVideoForm from "../AddVideoForm/index.js"
 
 const PlaylistView = ({playlists}) => {
     
     const playlistNames = Object.keys(playlists);
+    const [formVisible,setFormVisible] = useState(false);
   
-    return <Container>{
-        playlistNames.map(function (playlistName) { 
-            const playlist = playlists[playlistName];               
-            return(
-                <PlaylistContainer title={playlistName} playlist={playlist}></PlaylistContainer>                
-            )
-        }
-    )}
-    </Container>    
+    return (
+        <Container>
+            <FlexContainer>{
+                playlistNames.map(function (playlistName) { 
+                    const playlist = playlists[playlistName];               
+                    return(
+                        <PlaylistContainer key={playlistName} title={playlistName} playlist={playlist}></PlaylistContainer>                
+                    )
+                })
+            }
+            </FlexContainer>
+            <AddButton onClick={() => setFormVisible(true)}>+</AddButton>
+            <AddVideoForm formVisible={formVisible} close={() => setFormVisible(false)}></AddVideoForm>
+        </Container>           
+    )   
 }
 
 export default PlaylistView;

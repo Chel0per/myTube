@@ -6,7 +6,7 @@ const VideoContainer = ({playlist}) => {
         <Container>
             {playlist.map(function(video) {
                 return(
-                    <Url href={video.link}>
+                    <Url key={video._id} href={video.link}>
                         <Thumb src={video.thumb}></Thumb>
                         <Title>{video.title}</Title>
                     </Url>
