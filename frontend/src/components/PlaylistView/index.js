@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FlexContainer,Container,AddButton } from "./styles.js";
+import { FlexContainer,Container,AddButton,FixedContainer } from "./styles.js";
 import PlaylistContainer from "../PlaylistContainer/index.js"
 import AddVideoForm from "../AddVideoForm/index.js"
 
@@ -19,8 +19,10 @@ const PlaylistView = ({playlists}) => {
                 })
             }
             </FlexContainer>
-            <AddButton onClick={() => setFormVisible(true)}>+</AddButton>
-            <AddVideoForm formVisible={formVisible} close={() => setFormVisible(false)}></AddVideoForm>
+            <FixedContainer>
+                <AddButton onClick={() => setFormVisible(true)}>+</AddButton>
+            </FixedContainer>
+            <AddVideoForm formVisible={formVisible} setFormVisible={setFormVisible} close={() => setFormVisible(false)}></AddVideoForm>
         </Container>           
     )   
 }

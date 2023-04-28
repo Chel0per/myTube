@@ -16,20 +16,31 @@ export const FlexContainer = styled.div`
 
 export const AddButton = styled.button`
 
-        position: absolute;
-        top: 32px;
-        right: 16px;
-        z-index: 2;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background-color: red;
-        color: white;
-        display:flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 30px;
-        font-weight: bold;
+    position: sticky;
+    top: 32px;
+    right: 16px;
+    z-index: 3;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    font-weight: bold;
+    cursor: pointer;
+
+`;
+
+export const FixedContainer = styled.div`
+
+    position: absolute;
+    top: 32px;
+    right: 16px;
+    z-index: 2;
+    height: 100%;
 
 `;
 
