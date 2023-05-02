@@ -1,8 +1,19 @@
+const mongoose = require("mongoose");
 const { getAllItems } = require("./getAllItems.js");
+const { getAllCollectionsName } = require("./getAllCollectionsName.js");
+const { dropCollection } = require("./dropCollection.js");
 
 async function test(){
-    let playlists = await getAllItems();
-    console.log(playlists);
+    
+    await mongoose.connect("mongodb://127.0.0.1:27017/mytubeDB", { useNewUrlParser: true, useUnifiedTopology: true });
+    
+    // await dropCollection("Anime");
+
+    let names = await getAllCollectionsName();
+
+    mongoose.connection.close();
+    
+    console.log(names);
 }
 
 test();

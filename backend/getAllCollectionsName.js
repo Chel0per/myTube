@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
 async function getAllCollectionsName() {
-    
-    const db = mongoose.connection.db;
 
-    const collections = await db.listCollections().toArray();
+    let collections = await mongoose.connection.db.listCollections().toArray();
 
-    const collectionsName = collections.map(collection => collection.name);
+    let collectionsName = collections.map(collection => collection.name);
+
+    collectionsName.sort();
     
     return collectionsName;
 

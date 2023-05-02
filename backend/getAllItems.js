@@ -6,11 +6,12 @@ async function getAllItems () {
 
     await mongoose.connect("mongodb://127.0.0.1:27017/mytubeDB", { useNewUrlParser: true, useUnifiedTopology: true });   
    
-    const collectionsName = await getAllCollectionsName();
+    let collectionsName = await getAllCollectionsName();
 
     let items = [];
 
-    for (const collection of collectionsName) {
+    for (let collection of collectionsName) {
+        console.log(collection);
         const myModel = mongoose.model(collection, videoSchema, collection);
         const collectionItems = await myModel.find();
         items.push(collectionItems);

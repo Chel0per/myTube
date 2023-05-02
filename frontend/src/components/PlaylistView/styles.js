@@ -11,6 +11,7 @@ export const FlexContainer = styled.div`
     width:100%;
     display:flex;
     flex-direction: column;
+    box-sizing: border-box;
 
 `;
 
@@ -19,7 +20,7 @@ export const AddButton = styled.button`
     position: sticky;
     top: 32px;
     right: 16px;
-    z-index: 3;
+    z-index: 4;
     width: 50px;
     height: 50px;
     border-radius: 50%;

@@ -1,11 +1,18 @@
 import React from "react";
-import { Container,Title } from "./styles.js";
+import { Container,Title,TitleContainer,DeleteButton } from "./styles.js";
 import VideoContainer from "../VideoContainer/index.js"
 
-const PlaylistContainer = ({title,playlist}) => {
+const PlaylistContainer = ({title,playlist,effectCount,setEffect}) => {
     return(
         <Container>
-            <Title>{title}</Title>
+            <TitleContainer>
+                <Title>{title}</Title>
+                <DeleteButton onClick={ async()=> {
+                    await fetch("http://localhost:3001/dropCollection/"+encodeURIComponent(title));
+                    setEffect(effectCount+1);
+                }}>&times;</DeleteButton>
+            </TitleContainer>
+            
             <VideoContainer playlist={playlist}></VideoContainer>
         </Container>
     )

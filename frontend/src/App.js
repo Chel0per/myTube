@@ -7,6 +7,7 @@ import Banner from "./components/Banner/index.js"
 function App() {
 
   const [playlists,setPlaylist] = useState({});
+  const [effectCount,setEffect] = useState(0);
 
   useEffect(() => {
     const loadPlaylists = async () => {
@@ -16,13 +17,13 @@ function App() {
       setPlaylist(result);
     };
     loadPlaylists();
-  }, []);
+  }, [effectCount]);
 
   return (
     <CSSReset>
       <Header></Header>
       <Banner></Banner>
-      <PlaylistView playlists={playlists}></PlaylistView>
+      <PlaylistView playlists={playlists} effectCount={effectCount} setEffect={setEffect}></PlaylistView>
     </CSSReset>
   );
 
