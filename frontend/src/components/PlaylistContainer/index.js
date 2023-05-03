@@ -13,7 +13,7 @@ const PlaylistContainer = ({title,playlist,effectCount,setEffect}) => {
                 }}>&times;</DeleteButton>
             </TitleContainer>
             
-            <VideoContainer playlist={playlist}></VideoContainer>
+            <VideoContainer playlist={playlist} collection={title} setEffect={setEffect} effectCount={effectCount}></VideoContainer>
         </Container>
     )
 }

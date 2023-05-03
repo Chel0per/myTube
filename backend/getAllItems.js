@@ -1,17 +1,19 @@
 const mongoose = require("mongoose");
-const { getAllCollectionsName } = require("./getAllCollectionsName.js");
 const videoSchema = require("./videoSchema.js");
 
 async function getAllItems () {
 
     await mongoose.connect("mongodb://127.0.0.1:27017/mytubeDB", { useNewUrlParser: true, useUnifiedTopology: true });   
    
-    let collectionsName = await getAllCollectionsName();
+    let collections = await mongoose.connection.db.listCollections().toArray();
+
+    let collectionsName = collections.map(collection => collection.name);
+
+    collectionsName.sort();
 
     let items = [];
 
     for (let collection of collectionsName) {
-        console.log(collection);
         const myModel = mongoose.model(collection, videoSchema, collection);
         const collectionItems = await myModel.find();
         items.push(collectionItems);

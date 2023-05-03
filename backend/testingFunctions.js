@@ -2,18 +2,13 @@ const mongoose = require("mongoose");
 const { getAllItems } = require("./getAllItems.js");
 const { getAllCollectionsName } = require("./getAllCollectionsName.js");
 const { dropCollection } = require("./dropCollection.js");
+const { deleteVideo } = require("./deleteVideo.js")
 
 async function test(){
     
-    await mongoose.connect("mongodb://127.0.0.1:27017/mytubeDB", { useNewUrlParser: true, useUnifiedTopology: true });
-    
-    // await dropCollection("Anime");
+    await deleteVideo("Música","644ae0e10a80044ea51c4e3a");
+    console.log("deletou");
 
-    let names = await getAllCollectionsName();
-
-    mongoose.connection.close();
-    
-    console.log(names);
 }
 
 test();
