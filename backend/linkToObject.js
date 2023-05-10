@@ -4,9 +4,8 @@ async function linkToObject(input){
 
     const id = input.slice(input.length -11,input.length);
 
-    apiUrl= secret.api_part1 + id + secret.api_part2 + secret.api_key;
+    const apiUrl = secret.api_part1 + id + secret.api_part2 + secret.api_key;
     
-
     const response = await fetch(apiUrl);
     const data = await response.json();
     const titlev = data.items[0].snippet.title;

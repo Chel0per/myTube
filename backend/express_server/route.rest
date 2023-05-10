@@ -1,0 +1,13 @@
+GET http://localhost:3001/getAllItems
+
+### 
+
+POST http://localhost:3001/addVideo/https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DVt383KxaYpI/Anime
+
+###
+
+DELETE http://localhost:3001/dropCollection/Anime
+
+###
+
+GET http://localhost:3001/checkPlaylistEmpty/Anime

@@ -22,7 +22,7 @@ const AddVideoForm = ({formVisible,close,setFormVisible,setEffect,effectCount}) 
                             playlistName:value,
                     })}}></StyledInput>
                 <SubmitButton type="button" onClick={async ()=>{
-                    await fetch("http://localhost:3001/addVideo/" + encodeURIComponent(values.url) + "/" + encodeURIComponent(values.playlistName));
+                    await fetch("http://localhost:3001/addVideo/" + encodeURIComponent(values.url) + "/" + encodeURIComponent(values.playlistName),{method:"POST"});
                     setFormVisible(false)
                     setEffect(effectCount + 1);
                 }}>Submit</SubmitButton>

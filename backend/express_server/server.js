@@ -6,51 +6,94 @@ const { dropCollection } = require("../dropCollection.js");
 const { deleteVideo } = require("../deleteVideo.js");
 const { updateTitle } = require("../updateTitle.js");
 const { getOriginalTitle } = require("../getOriginalTitle.js");
+const { checkPlaylistEmpty } = require("../checkPlaylistEmpty.js");
 
 const app = express();
 app.use(cors());
 
+app.listen(3001,() => console.log("Server started on port 3001"));
+
 app.get("/getAllItems",async function(req,res){
     
-    res.send(await getAllItems());
+    try{
+        let Items = await getAllItems();
+        res.send(Items);
+    }
+    catch(error){
+        res.status(400).json({message: error.message}); 
+    }
 
 });
 
-app.get("/addVideo/:link/:playlist",async function(req,res){
+app.get("/checkPlaylistEmpty/:playlist",async function(req,res){
+    
+    try{
+        let Empty = await checkPlaylistEmpty(req.params.playlist);
+        res.send(Empty);
+    }
+    catch(error){
+        res.status(400).json({message: error.message}); 
+    }
+
+});
+
+app.post("/addVideo/:link/:playlist",async function(req,res){
    
-    await addVideo(req.params.link,req.params.playlist);
-    res.send("Video added successfully")
+    try {
+        await addVideo(req.params.link,req.params.playlist);
+        res.status(201).send("Video added succesfully!");
+    }
+    catch(error) {
+        res.status(400).json({message: error.message});
+    }
 
 })
 
-app.listen(3001,() => {
-    console.log("Server started on port 3001");
-});
+app.delete("/dropCollection/:collection",async function(req,res){
 
-app.get("/dropCollection/:collection",async function(req,res){
-
-    await dropCollection(req.params.collection);
-    res.send("Collection deleted succesfully");
-
-})
-
-app.get("/deleteVideo/:collection/:id",async function(req,res){
-
-    await deleteVideo(req.params.collection,req.params.id);
-    res.send("Video deleted succesfully")
+    try{
+        await dropCollection(req.params.collection);
+        res.status(201).send("Collection droped succesfully!");
+    }
+    catch(error){
+        res.status(400).json({message: error.message});
+    }
+    
 
 })
 
-app.get("/updateTitle/:collection/:id/:newTitle",async function(req,res){
+app.delete("/deleteVideo/:collection/:id",async function(req,res){
 
-    await updateTitle(req.params.collection,req.params.id,req.params.newTitle);
-    res.send("Title updated succesfully")
+    try{
+        await deleteVideo(req.params.collection,req.params.id);
+        res.status(201).send("Collection droped succesfully!");
+    }
+    catch(error){
+        res.status(400).json({message: error.message});
+    }
+    
+})
+
+app.put("/updateTitle/:collection/:id/:newTitle",async function(req,res){
+
+    try{
+        await updateTitle(req.params.collection,req.params.id,req.params.newTitle);
+        res.status(201).send("Title updated succesfully!");
+    }
+    catch(error){
+        res.status(400).json({message: error.message});
+    }
 
 })
 
-app.get("/getOriginalTitle/:collection/:id/:link",async function(req,res){
+app.put("/getOriginalTitle/:collection/:id/:link",async function(req,res){
 
-    await getOriginalTitle(req.params.collection,req.params.id,req.params.link);
-    res.send("Uptaded to original title succesfully")
+    try{
+        await getOriginalTitle(req.params.collection,req.params.id,req.params.link);
+        res.status(201).send("Title updated succesfully!");
+    }
+    catch(error){
+        res.status(400).json({message: error.message});
+    }
 
 })
