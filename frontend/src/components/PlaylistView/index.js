@@ -3,7 +3,7 @@ import { FlexContainer,Container,AddButton,FixedContainer } from "./styles.js";
 import PlaylistContainer from "../PlaylistContainer/index.js"
 import AddVideoForm from "../AddVideoForm/index.js"
 
-const PlaylistView = ({playlists,setEffect,effectCount}) => {
+const PlaylistView = ({filter,playlists,setEffect,effectCount}) => {
     
     const playlistNames = Object.keys(playlists);
     const [formVisible,setFormVisible] = useState(false);
@@ -12,10 +12,15 @@ const PlaylistView = ({playlists,setEffect,effectCount}) => {
         <Container>
             <FlexContainer>{
                 playlistNames.map(function (playlistName) { 
-                    const playlist = playlists[playlistName];               
+                    let playlist = playlists[playlistName];
+                    playlist = playlist.filter((video) => {
+                        return video.title.toLowerCase().includes(filter.toLowerCase())
+                    });
+                    if (playlist.length > 0){               
                     return(
-                        <PlaylistContainer key={playlistName} title={playlistName} playlist={playlist} effectCount={effectCount} setEffect={setEffect}></PlaylistContainer>                
-                    )
+                        <PlaylistContainer filter={filter} key={playlistName} title={playlistName} playlist={playlist} effectCount={effectCount} setEffect={setEffect}></PlaylistContainer>                
+                    )}
+                    else return null;
                 })
             }
             </FlexContainer>

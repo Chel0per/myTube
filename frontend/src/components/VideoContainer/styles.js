@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 
-    width: calc(100vw - 16px * 2);
     display: grid;
     grid-gap: 16px;
     grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
@@ -32,5 +31,7 @@ export const Title = styled.span`
 export const Clickable = styled.a`
 
     cursor: pointer;
+    color:black;
+    text-decoration: none;
 
 `;

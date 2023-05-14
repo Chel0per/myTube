@@ -3,7 +3,10 @@ import {Container,SearchBar,Name,Logo,Photo,Occupation,Creator,Box,Tag,My,Tube} 
 import { FaSearch } from "react-icons/fa";
 import userLogo from "./userlogo.jpg"
 
-const Header = () => {
+const Header = ({filter,setFilter}) => {
+
+    let shouldHideTag = filter !== "";
+        
     return(
         <Container>
             <Logo>
@@ -11,8 +14,8 @@ const Header = () => {
                 <Tube>Tube</Tube>
             </Logo>
             <Box>
-                <SearchBar></SearchBar>
-                <Tag><FaSearch></FaSearch></Tag>
+                <SearchBar onChange={(e)=> setFilter(e.target.value)}></SearchBar>
+                {!shouldHideTag && <Tag><FaSearch /></Tag>}
             </Box>
             <Creator>
                 <Photo src={userLogo}/>

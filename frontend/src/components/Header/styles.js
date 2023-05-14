@@ -23,7 +23,7 @@ export const SearchBar = styled.input`
     border-radius: 10px;
     box-sizing: border-box;
     font-family: Comic Sans MS;
-    font-size: 26px;
+    font-size: 20px;
     color: #222222;
     outline: none;
     transition: .5s;

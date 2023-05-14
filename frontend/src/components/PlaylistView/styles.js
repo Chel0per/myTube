@@ -32,6 +32,7 @@ export const AddButton = styled.button`
     font-size: 36px;
     font-weight: bold;
     cursor: pointer;
+    border: 2px solid black
 
 `;
 

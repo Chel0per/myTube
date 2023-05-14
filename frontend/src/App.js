@@ -6,26 +6,27 @@ import Banner from "./components/Banner/index.js"
 
 function App() {
 
-  const [playlists,setPlaylist] = useState({});
-  const [effectCount,setEffect] = useState(0);
+	const [playlists,setPlaylist] = useState({});
+	const [effectCount,setEffect] = useState(0);
+	const [filter,setFilter] = useState("");
 
-  useEffect(() => {
-    const loadPlaylists = async () => {
-      const response = await fetch("http://localhost:3001/getAllItems");
-      const result = await response.json();
-      console.log("useEffect Hook activated")
-      setPlaylist(result);
-    };
-    loadPlaylists();
-  }, [effectCount]);
+	useEffect(() => {
+		const loadPlaylists = async () => {
+      		const response = await fetch("http://localhost:3001/getAllItems");
+      		const result = await response.json();
+      		console.log("useEffect Hook activated")
+      		setPlaylist(result);
+    	};
+    	loadPlaylists();
+  	}, [effectCount]);
 
-  return (
-    <CSSReset>
-      <Header></Header>
-      <Banner></Banner>
-      <PlaylistView playlists={playlists} effectCount={effectCount} setEffect={setEffect}></PlaylistView>
-    </CSSReset>
-  );
+	return (
+    	<CSSReset>
+    		<Header setFilter={setFilter} filter={filter}></Header>
+    		<Banner></Banner>
+    		<PlaylistView playlists={playlists} effectCount={effectCount} setEffect={setEffect} filter={filter}></PlaylistView>
+    	</CSSReset>
+	);
 
 }
 
