@@ -1,8 +1,8 @@
-import React,{ useState } from "react";
+import React from "react";
 import { Container,Url,Title,Clickable } from "./styles.js"
 import ThumbContainer from "../ThumbContainer/index.js";
 
-const VideoContainer = ({filter,playlist,collection,setEffect,effectCount}) => {
+const VideoContainer = ({playlist,collection,setEffect,effectCount}) => {
     
     return(
         <Container>
