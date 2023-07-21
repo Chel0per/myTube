@@ -79,6 +79,7 @@ export const UserSpam = styled.span`
 
     height:15px;
     font-size: 12px;
+    color:${props => props.color}; 
 
 `;
 

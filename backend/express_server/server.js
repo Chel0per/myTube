@@ -19,9 +19,9 @@ app.get("/loginValidate/:username/:password", async function(req,res){
 
     try{
         let user = await getUser(req.params.username);
-        if(user === null) res.send("Unvalid user");
+        if(user === null) res.send({status:"Unvalid user"});
         else{
-            if(!checkPassword(user,req.params.password)) res.send("Incorrect password");
+            if(!checkPassword(user,req.params.password)) res.send({status:"Incorrect password"});
             else res.send(user);
         }
     }
