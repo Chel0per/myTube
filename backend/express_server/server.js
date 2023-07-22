@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require('cors');
-// const { getAllItems } = require("../getAllItems.js");
-// const { addVideo } = require("../addVideo.js");
+const { addVideo } = require("../addVideo.js");
 // const { dropCollection } = require("../dropCollection.js");
 // const { deleteVideo } = require("../deleteVideo.js");
 // const { updateTitle } = require("../updateTitle.js");
@@ -24,6 +23,18 @@ app.get("/loginValidate/:username/:password", async function(req,res){
             if(!checkPassword(user,req.params.password)) res.send({status:"Incorrect password"});
             else res.send(user);
         }
+    }
+    catch(error){
+        res.status(400).json({message: error.message}); 
+    }  
+
+})
+
+app.get("/getUser/:username", async function(req,res){
+
+    try{
+        let user = await getUser(req.params.username);
+        res.send(user);
     }
     catch(error){
         res.status(400).json({message: error.message}); 
@@ -55,17 +66,17 @@ app.get("/loginValidate/:username/:password", async function(req,res){
 
 // });
 
-// app.post("/addVideo/:link/:playlist",async function(req,res){
-   
-//     try {
-//         await addVideo(req.params.link,req.params.playlist);
-//         res.status(201).send("Video added succesfully!");
-//     }
-//     catch(error) {
-//         res.status(400).json({message: error.message});
-//     }
+app.post("/addVideo/:link/:playlist/:username",async function(req,res){
 
-// })
+    try {
+        await addVideo(req.params.link,req.params.playlist,req.params.username);
+        res.status(201).send("Video added succesfully!");
+    }
+    catch(error) {
+        res.status(400).json({message: error.message});
+    }
+
+})
 
 // app.delete("/dropCollection/:collection",async function(req,res){
 

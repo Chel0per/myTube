@@ -8,27 +8,25 @@ import Banner from "../components/Banner/index.js"
 function HomePage() {
 
 	const location = useLocation();
-	const userData = location.state;
 	
-	const [playlists,setPlaylist] = useState({});
+	const [userData,setUserData] = useState(location.state);
 	const [effectCount,setEffect] = useState(0);
 	const [filter,setFilter] = useState("");
 
 	useEffect(() => {
 		const loadPlaylists = async () => {
-      		const response = await fetch("http://localhost:3001/getAllItems");
-      		const result = await response.json();
-      		console.log("useEffect Hook activated")
-      		setPlaylist(result);
+				const response = await fetch("http://localhost:3001/getUser/"+encodeURIComponent(userData.user));
+      			const result = await response.json();
+      			setUserData(result);
     	};
     	loadPlaylists();
   	}, [effectCount]);
 
 	return (
     	<CSSReset>
-    		<Header setFilter={setFilter} filter={filter}></Header>
+    		<Header setFilter={setFilter} filter={filter} username={userData.user}></Header>
     		<Banner></Banner>
-    		<PlaylistView playlists={playlists} effectCount={effectCount} setEffect={setEffect} filter={filter}></PlaylistView>
+    		<PlaylistView playlists={userData.playlists} effectCount={effectCount} setEffect={setEffect} filter={filter} username={userData.user}></PlaylistView>
     	</CSSReset>
 	);
 

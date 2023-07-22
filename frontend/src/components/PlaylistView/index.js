@@ -3,22 +3,20 @@ import { FlexContainer,Container,AddButton,FixedContainer } from "./styles.js";
 import PlaylistContainer from "../PlaylistContainer/index.js"
 import AddVideoForm from "../AddVideoForm/index.js"
 
-const PlaylistView = ({filter,playlists,setEffect,effectCount}) => {
+const PlaylistView = ({filter,playlists,setEffect,effectCount,username}) => {
     
-    const playlistNames = Object.keys(playlists);
     const [formVisible,setFormVisible] = useState(false);
   
     return (
         <Container>
             <FlexContainer>{
-                playlistNames.map(function (playlistName) { 
-                    let playlist = playlists[playlistName];
-                    playlist = playlist.filter((video) => {
+                playlists.map(function (playlist) { 
+                    let filteredPlaylist = playlist.videos.filter((video) => {
                         return video.title.toLowerCase().includes(filter.toLowerCase())
                     });
-                    if (playlist.length > 0){               
+                    if (filteredPlaylist.length > 0){               
                     return(
-                        <PlaylistContainer filter={filter} key={playlistName} title={playlistName} playlist={playlist} effectCount={effectCount} setEffect={setEffect}></PlaylistContainer>                
+                        <PlaylistContainer filter={filter} key={filteredPlaylist._id} title={filteredPlaylist.name} playlist={filteredPlaylist} effectCount={effectCount} setEffect={setEffect} username={username}></PlaylistContainer>                
                     )}
                     else return null;
                 })
@@ -27,7 +25,7 @@ const PlaylistView = ({filter,playlists,setEffect,effectCount}) => {
             <FixedContainer>
                 <AddButton onClick={() => setFormVisible(true)}>+</AddButton>
             </FixedContainer>
-            <AddVideoForm formVisible={formVisible} setFormVisible={setFormVisible} close={() => setFormVisible(false)} effectCount={effectCount} setEffect={setEffect}></AddVideoForm>
+            <AddVideoForm formVisible={formVisible} setFormVisible={setFormVisible} close={() => setFormVisible(false)} effectCount={effectCount} setEffect={setEffect} username={username}></AddVideoForm>
         </Container>           
     )   
 }

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-async function getAllCollectionsName() {
+async function getAllPlaylists() {
 
     await mongoose.connect("mongodb://127.0.0.1:27017/mytubeDB", { useNewUrlParser: true, useUnifiedTopology: true });
     
@@ -16,4 +16,4 @@ async function getAllCollectionsName() {
 
 }
 
-module.exports.getAllCollectionsName = getAllCollectionsName;
+module.exports.getAllPlaylists = getAllPlaylists;

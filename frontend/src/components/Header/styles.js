@@ -59,8 +59,7 @@ export const Logo = styled.div`
     width:175px;
     justify-content:center;
     padding-left:50px;
-
-
+    object-fit:auto;
 
 `;
 
@@ -80,16 +79,16 @@ export const Tube = styled.p`
 
 `;
 
-export const Creator = styled.div`
+export const User = styled.div`
 
     display:flex;
     flex-direction:column;
     align-items:center;
-    justify-content:space-around;
+    justify-content:center;
     height:100px;
     width:175px;
     padding-right:50px;
-    
+    gap:10px
 
 
 `;
@@ -123,7 +122,10 @@ export const Photo = styled.img`
     height: 50px;
     width: 50px;
     border-radius:50%;
-    
+    cursor:pointer;
+    :hover {
+        transform: scale(1.1);
+    }
 
 
 `;
