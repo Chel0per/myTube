@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require('cors');
 const { addVideo } = require("../addVideo.js");
 // const { dropCollection } = require("../dropCollection.js");
-// const { deleteVideo } = require("../deleteVideo.js");
+const { deleteVideo } = require("../deleteVideo.js");
 // const { updateTitle } = require("../updateTitle.js");
 // const { getOriginalTitle } = require("../getOriginalTitle.js");
 // const { checkPlaylistEmpty } = require("../checkPlaylistEmpty.js");
@@ -91,17 +91,17 @@ app.post("/addVideo/:link/:playlist/:username",async function(req,res){
 
 // })
 
-// app.delete("/deleteVideo/:collection/:id",async function(req,res){
+app.delete("/deleteVideo/:username/:playlistId/:videoId",async function(req,res){
 
-//     try{
-//         await deleteVideo(req.params.collection,req.params.id);
-//         res.status(201).send("Collection droped succesfully!");
-//     }
-//     catch(error){
-//         res.status(400).json({message: error.message});
-//     }
+    try{
+        await deleteVideo(req.params.username,req.params.playlistId,req.params.playlistId);
+        res.status(201).send("Video deleted succesfully!");
+    }
+    catch(error){
+        res.status(400).json({message: error.message});
+    }
     
-// })
+})
 
 // app.put("/updateTitle/:collection/:id/:newTitle",async function(req,res){
 

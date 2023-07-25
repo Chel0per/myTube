@@ -16,7 +16,7 @@ const PlaylistView = ({filter,playlists,setEffect,effectCount,username}) => {
                     });
                     if (filteredPlaylist.length > 0){               
                     return(
-                        <PlaylistContainer filter={filter} key={filteredPlaylist._id} title={filteredPlaylist.name} playlist={filteredPlaylist} effectCount={effectCount} setEffect={setEffect} username={username}></PlaylistContainer>                
+                        <PlaylistContainer filter={filter} key={playlist._id} playlistId={playlist._id} title={playlist.name} playlist={filteredPlaylist} effectCount={effectCount} setEffect={setEffect} username={username}></PlaylistContainer>                
                     )}
                     else return null;
                 })

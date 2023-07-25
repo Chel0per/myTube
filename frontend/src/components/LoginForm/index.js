@@ -33,7 +33,7 @@ const LoginForm = () => {
             setUserSpanColor("green");
         }
         else{
-            navigate("/home/",{state:userData});
+            navigate("/home",{state:userData});
         }
     }   
     
@@ -55,7 +55,7 @@ const LoginForm = () => {
                     </UserDiv>
                     <PasswordDiv>
                         <PasswordLabel>Password</PasswordLabel>
-                        <PasswordInput boxShadow={passwordBorder} onChange={(e) =>{
+                        <PasswordInput type="password" boxShadow={passwordBorder} onChange={(e) =>{
                         const value = e.target.value;
                         setValues({
                             ...values,

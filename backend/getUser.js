@@ -9,6 +9,8 @@ async function getUser(username){
 
     const foundUser = await User.findOne({user:username});
 
+    // console.log(foundUser.playlists[0]);
+
     await mongoose.connection.close();
 
     return foundUser;
@@ -16,3 +18,5 @@ async function getUser(username){
 }
 
 module.exports.getUser = getUser;
+
+// getUser("chel0per");

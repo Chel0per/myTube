@@ -2,7 +2,7 @@ import React from "react";
 import { Container,Title,TitleContainer,DeleteButton } from "./styles.js";
 import VideoContainer from "../VideoContainer/index.js"
 
-const PlaylistContainer = ({filter,title,playlist,effectCount,setEffect}) => {
+const PlaylistContainer = ({filter,username,title,playlist,effectCount,setEffect,playlistId}) => {
     return(
         <Container>
             <TitleContainer>
@@ -13,7 +13,7 @@ const PlaylistContainer = ({filter,title,playlist,effectCount,setEffect}) => {
                 }}>&times;</DeleteButton>
             </TitleContainer>
             
-            <VideoContainer filter={filter} playlist={playlist} collection={title} setEffect={setEffect} effectCount={effectCount}></VideoContainer>
+            <VideoContainer filter={filter} playlist={playlist} playlistId={playlistId} setEffect={setEffect} effectCount={effectCount} username={username}></VideoContainer>
         </Container>
     )
 }

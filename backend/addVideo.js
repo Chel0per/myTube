@@ -10,8 +10,8 @@ async function addVideo(link,playlist,username){
 
     await mongoose.connect("mongodb://127.0.0.1:27017/mytubeusersDB", { useNewUrlParser: true, useUnifiedTopology: true });
 
-    const Video = mongoose.model("Video",videoSchema);
-    const Playlist = mongoose.model("Playlist",playlistSchema);
+    const Video = mongoose.model("video",videoSchema,"videos");
+    const Playlist = mongoose.model("playlist",playlistSchema,"playlists");
     
     const User = mongoose.model("user", userSchema,"users");
 
@@ -31,6 +31,9 @@ async function addVideo(link,playlist,username){
         user.playlists[user.playlists.length - 1].videos.push(newVideo);
         await user.save();
     }
+
+    mongoose.connection.deleteModel("videos");
+    mongoose.connection.deleteModel("playlists");
 
     mongoose.connection.close();
 
