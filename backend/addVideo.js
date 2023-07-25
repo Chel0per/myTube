@@ -32,8 +32,8 @@ async function addVideo(link,playlist,username){
         await user.save();
     }
 
-    mongoose.connection.deleteModel("videos");
-    mongoose.connection.deleteModel("playlists");
+    mongoose.connection.deleteModel("video");
+    mongoose.connection.deleteModel("playlist");
 
     mongoose.connection.close();
 

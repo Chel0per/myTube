@@ -24,8 +24,16 @@ const ThumbContainer = ({ src,link,username,id,playlistId,setEffect,effectCount 
             <FormFlex>
                 <TitleInput placeholder="Type the new title" onChange={(e) => setNewTitle(e.target.value)}></TitleInput>
                 <ButtonsRow>
-                    <UpdateButton >Update</UpdateButton>
-                    <OriginalButton >Original</OriginalButton>
+                    <UpdateButton onClick={async() => {
+                        await fetch("http://localhost:3001/updateTitle/" + encodeURIComponent(username) +"/"+ encodeURIComponent(playlistId) +"/" + encodeURIComponent(id) + "/" + newTitle,{method:"PUT"});
+                        setEffect(effectCount + 1);
+                        setViewThumbModal("Thumb");
+                    }}>Update</UpdateButton>
+                    <OriginalButton onClick={async() => {
+                        await fetch("http://localhost:3001/getOriginalTitle/" + encodeURIComponent(username) +"/"+ encodeURIComponent(playlistId) +"/" + encodeURIComponent(id),{method:"PUT"});
+                        setEffect(effectCount + 1);
+                        setViewThumbModal("Thumb");
+                    }}>Original</OriginalButton>
                 </ButtonsRow> 
             </FormFlex>                            
         </UpdateForm>

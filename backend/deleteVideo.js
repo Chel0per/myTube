@@ -15,7 +15,7 @@ async function deleteVideo(username,playlistId,videoId) {
     let videoIndex = playlist.videos.findIndex((video) => video._id.toString() === videoId);
     user.playlists[playlistIndex].videos.splice(videoIndex, 1);
 
-    if(user.playlists[playlistIndex].length == 0) user.playlists.splice(playlistIndex, 1);
+    if(user.playlists[playlistIndex].length === 0) user.playlists.splice(playlistIndex, 1);
 
     await user.save();
 

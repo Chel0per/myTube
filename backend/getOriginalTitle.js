@@ -1,22 +1,31 @@
 const mongoose = require("mongoose");
-const videoSchema = require("./videoSchema.js");
+const userSchema = require("./schemas/userSchema.js");
 const secret = require("./secret.json");
 
-async function getOriginalTitle(collection,id,link) {
+async function getOriginalTitle(username,playlistId,videoId) {
 
-    await mongoose.connect("mongodb://127.0.0.1:27017/mytubeDB", { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect("mongodb://127.0.0.1:27017/mytubeusersDB", { useNewUrlParser: true, useUnifiedTopology: true });
 
-    const Video = mongoose.model(collection,videoSchema,collection);
+    const User = mongoose.model("user", userSchema,"users");
 
-    const videoId = link.slice(link.length -11,link.length);
+    const user = await User.findOne({user:username});
 
-    const apiUrl= secret.api_part1 + videoId + secret.api_part2 + secret.api_key;
-    
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-    const newTitle = data.items[0].snippet.title;
+    let playlistIndex = user.playlists.findIndex((playlist) => playlist._id.toString() === playlistId);
+    let playlist = user.playlists[playlistIndex];
 
-    await Video.updateOne({_id:id},{title:newTitle});
+    let videoIndex = playlist.videos.findIndex((video) => video._id.toString() === videoId);
+
+    let videoLink = user.playlists[playlistIndex].videos[videoIndex].link;
+    let apiId = videoLink.slice(videoLink.length -11,videoLink.length);
+    let apiUrl = secret.api_part1 + apiId + secret.api_part2 + secret.api_key;
+
+    let response = await fetch(apiUrl);
+    let data = await response.json();
+    let originalTitle = data.items[0].snippet.title;
+
+    user.playlists[playlistIndex].videos[videoIndex].title = originalTitle;
+
+    await user.save();
 
     mongoose.connection.close();
 

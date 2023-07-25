@@ -8,7 +8,7 @@ const PlaylistContainer = ({filter,username,title,playlist,effectCount,setEffect
             <TitleContainer>
                 <Title>{title}</Title>
                 <DeleteButton onClick={ async()=> {
-                    await fetch("http://localhost:3001/dropCollection/"+encodeURIComponent(title),{method:"DELETE"});
+                    await fetch("http://localhost:3001/deletePlaylist/" + encodeURIComponent(username) + "/" + encodeURIComponent(playlistId),{method:"DELETE"});
                     setEffect(effectCount+1);
                 }}>&times;</DeleteButton>
             </TitleContainer>
