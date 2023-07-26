@@ -1,14 +1,12 @@
 const mongoose = require("mongoose");
 const { linkToObject } = require("./linkToObject.js");
-const videoSchema = require("./schemas/videoSchema.js");
-const playlistSchema = require("./schemas/playlistSchema.js");
-const userSchema = require("./schemas/userSchema.js")
+const videoSchema = require("../schemas/videoSchema.js");
+const playlistSchema = require("../schemas/playlistSchema.js");
+const userSchema = require("../schemas/userSchema.js")
 
 async function addVideo(link,playlist,username){ 
     
     const object = await linkToObject(link);
-
-    await mongoose.connect("mongodb://127.0.0.1:27017/mytubeusersDB", { useNewUrlParser: true, useUnifiedTopology: true });
 
     const Video = mongoose.model("video",videoSchema,"videos");
     const Playlist = mongoose.model("playlist",playlistSchema,"playlists");
@@ -34,8 +32,6 @@ async function addVideo(link,playlist,username){
 
     mongoose.connection.deleteModel("video");
     mongoose.connection.deleteModel("playlist");
-
-    mongoose.connection.close();
 
 }
 

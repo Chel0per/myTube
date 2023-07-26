@@ -1,18 +1,22 @@
 const express = require("express");
-const cors = require('cors');
-const { addVideo } = require("../addVideo.js");
-const { deletePlaylist } = require("../deletePlaylist.js");
-const { deleteVideo } = require("../deleteVideo.js");
-const { updateTitle } = require("../updateTitle.js");
-const { getOriginalTitle } = require("../getOriginalTitle.js");
+const cors = require("cors");
+const mongoose = require("mongoose");
+const { addVideo } = require("../services/addVideo.js");
+const { deletePlaylist } = require("../services/deletePlaylist.js");
+const { deleteVideo } = require("../services/deleteVideo.js");
+const { updateTitle } = require("../services/updateTitle.js");
+const { getOriginalTitle } = require("../services/getOriginalTitle.js");
 // const { checkPlaylistEmpty } = require("../checkPlaylistEmpty.js");
-const { checkPassword } = require("../checkPassword.js")
-const { getUser } = require("../getUser.js")
+const { checkPassword } = require("../services/checkPassword.js")
+const { getUser } = require("../services/getUser.js")
 
 const app = express();
 app.use(cors());
 
-app.listen(3001,() => console.log("Server started on port 3001"));
+app.listen(3001,async() => {
+    await mongoose.connect("mongodb://127.0.0.1:27017/mytubeusersDB", { useNewUrlParser: true, useUnifiedTopology: true });
+    console.log("Server started on port 3001");
+});
 
 app.get("/loginValidate/:username/:password", async function(req,res){
 

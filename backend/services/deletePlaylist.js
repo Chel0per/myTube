@@ -1,9 +1,7 @@
 const mongoose = require("mongoose");
-const userSchema = require("./schemas/userSchema.js");
+const userSchema = require("../schemas/userSchema.js");
 
 async function deletePlaylist(username,id){
-
-    await mongoose.connect("mongodb://127.0.0.1:27017/mytubeusersDB", { useNewUrlParser: true, useUnifiedTopology: true });
     
     const User = mongoose.model("user", userSchema,"users");
 
@@ -14,8 +12,6 @@ async function deletePlaylist(username,id){
     user.playlists.splice(playlistIndex, 1);
 
     await user.save();
-
-    mongoose.connection.close();
 
 }
 

@@ -1,4 +1,4 @@
-const secret = require("./secret.json");
+const secret = require("../secret.json");
 
 async function linkToObject(input){
 

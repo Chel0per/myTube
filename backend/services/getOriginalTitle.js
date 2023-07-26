@@ -1,10 +1,8 @@
 const mongoose = require("mongoose");
-const userSchema = require("./schemas/userSchema.js");
-const secret = require("./secret.json");
+const userSchema = require("../schemas/userSchema.js");
+const secret = require("../secret.json");
 
 async function getOriginalTitle(username,playlistId,videoId) {
-
-    await mongoose.connect("mongodb://127.0.0.1:27017/mytubeusersDB", { useNewUrlParser: true, useUnifiedTopology: true });
 
     const User = mongoose.model("user", userSchema,"users");
 
@@ -26,8 +24,6 @@ async function getOriginalTitle(username,playlistId,videoId) {
     user.playlists[playlistIndex].videos[videoIndex].title = originalTitle;
 
     await user.save();
-
-    mongoose.connection.close();
 
 }
 

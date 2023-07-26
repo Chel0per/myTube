@@ -1,9 +1,7 @@
 const mongoose = require("mongoose");
-const userSchema = require("./schemas/userSchema");
+const userSchema = require("../schemas/userSchema");
 
 async function addUser(username,password) {
-
-    await mongoose.connect("mongodb://127.0.0.1:27017/mytubeuserDB", { useNewUrlParser: true, useUnifiedTopology: true });
 
     const object = {
         username:username,
@@ -17,8 +15,6 @@ async function addUser(username,password) {
 
     await newUser.save();
 
-    mongoose.connection.close();
-     
 }
 
 module.exports.addUser = addUser;
