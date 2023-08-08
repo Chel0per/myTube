@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
-const { linkToObject } = require("./linkToObject.js");
+const { idToObject } = require("./idToObject.js");
 const videoSchema = require("../schemas/videoSchema.js");
 const playlistSchema = require("../schemas/playlistSchema.js");
 const userSchema = require("../schemas/userSchema.js")
 
-async function addVideo(link,playlist,username){ 
+async function addVideo(id,playlist,username){ 
     
-    const object = await linkToObject(link);
+    const object = await idToObject(id);
 
     const Video = mongoose.model("video",videoSchema,"videos");
     const Playlist = mongoose.model("playlist",playlistSchema,"playlists");

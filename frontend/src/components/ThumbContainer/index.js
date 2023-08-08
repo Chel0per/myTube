@@ -3,7 +3,7 @@ import { Container, Thumb, DeleteButton,UpdateButton,Clickable,ModalButton,Updat
 import { BiChevronRight } from "react-icons/bi";
 
 
-const ThumbContainer = ({ src,link,username,id,playlistId,setEffect,effectCount }) => {
+const ThumbContainer = ({ src,link,username,id,playlistId,setEffect,effectCount,setWarning }) => {
  
     const [thumbModal,setViewThumbModal] = useState("Thumb");
     const [newTitle,setNewTitle] = useState("");
@@ -12,7 +12,9 @@ const ThumbContainer = ({ src,link,username,id,playlistId,setEffect,effectCount 
         <Container>
             <Clickable href={link}><Thumb src={src}></Thumb></Clickable>
             <DeleteButton onClick={async() => {
-                await fetch("http://localhost:3001/deleteVideo/" + encodeURIComponent(username) +"/"+ encodeURIComponent(playlistId) +"/" + encodeURIComponent(id),{method:"DELETE"});
+                let response = await fetch("http://localhost:3001/deleteVideo/" + encodeURIComponent(username) +"/"+ encodeURIComponent(playlistId) +"/" + encodeURIComponent(id),{method:"DELETE"});
+                let data = await response.json();
+                setWarning(data.status);
                 setEffect(effectCount + 1);
             }}>&times;</DeleteButton>
             <ModalButton onClick={() => setViewThumbModal("Modal")}>U</ModalButton>
@@ -25,12 +27,16 @@ const ThumbContainer = ({ src,link,username,id,playlistId,setEffect,effectCount 
                 <TitleInput placeholder="Type the new title" onChange={(e) => setNewTitle(e.target.value)}></TitleInput>
                 <ButtonsRow>
                     <UpdateButton onClick={async() => {
-                        await fetch("http://localhost:3001/updateTitle/" + encodeURIComponent(username) +"/"+ encodeURIComponent(playlistId) +"/" + encodeURIComponent(id) + "/" + newTitle,{method:"PUT"});
+                        let response = await fetch("http://localhost:3001/updateTitle/" + encodeURIComponent(username) +"/"+ encodeURIComponent(playlistId) +"/" + encodeURIComponent(id) + "/" + newTitle,{method:"PUT"});
+                        let data = await response.json();
+                        setWarning(data.status);
                         setEffect(effectCount + 1);
                         setViewThumbModal("Thumb");
                     }}>Update</UpdateButton>
                     <OriginalButton onClick={async() => {
-                        await fetch("http://localhost:3001/getOriginalTitle/" + encodeURIComponent(username) +"/"+ encodeURIComponent(playlistId) +"/" + encodeURIComponent(id),{method:"PUT"});
+                        let response = await fetch("http://localhost:3001/getOriginalTitle/" + encodeURIComponent(username) +"/"+ encodeURIComponent(playlistId) +"/" + encodeURIComponent(id),{method:"PUT"});
+                        let data = await response.json();
+                        setWarning(data.status);
                         setEffect(effectCount + 1);
                         setViewThumbModal("Thumb");
                     }}>Original</OriginalButton>

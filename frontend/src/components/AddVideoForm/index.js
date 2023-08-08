@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container , ModalContainer , CloseButton , SubmitButton , StyledInput } from "./styles.js"
 
-const AddVideoForm = ({formVisible,close,setFormVisible,setEffect,effectCount,username}) => {
+const AddVideoForm = ({formVisible,close,setFormVisible,setEffect,effectCount,username,setWarning}) => {
     
     const [values,setValues] = useState({url:"",playlistName:""});
     
@@ -22,8 +22,10 @@ const AddVideoForm = ({formVisible,close,setFormVisible,setEffect,effectCount,us
                             playlistName:value,
                     })}}></StyledInput>
                 <SubmitButton type="button" onClick={async ()=>{
-                    await fetch("http://localhost:3001/addVideo/" + encodeURIComponent(values.url) + "/" + encodeURIComponent(values.playlistName) + "/" + encodeURIComponent(username),{method:"POST"});
-                    setFormVisible(false)
+                    let response = await fetch("http://localhost:3001/addVideo/" + encodeURIComponent(values.url) + "/" + encodeURIComponent(values.playlistName) + "/" + encodeURIComponent(username),{method:"POST"});
+                    let data = await response.json();
+                    setFormVisible(false);
+                    setWarning(data.status);
                     setEffect(effectCount + 1);
                 }}>Submit</SubmitButton>
             </ModalContainer>

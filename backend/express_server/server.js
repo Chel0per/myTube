@@ -6,7 +6,7 @@ const { deletePlaylist } = require("../services/deletePlaylist.js");
 const { deleteVideo } = require("../services/deleteVideo.js");
 const { updateTitle } = require("../services/updateTitle.js");
 const { getOriginalTitle } = require("../services/getOriginalTitle.js");
-// const { checkPlaylistEmpty } = require("../checkPlaylistEmpty.js");
+const { checkValidLink } = require("../services/checkValidLink.js");
 const { checkPassword } = require("../services/checkPassword.js")
 const { getUser } = require("../services/getUser.js")
 
@@ -73,9 +73,17 @@ app.get("/getUser/:username", async function(req,res){
 app.post("/addVideo/:link/:playlist/:username",async function(req,res){
 
     try {
-        await addVideo(req.params.link,req.params.playlist,req.params.username);
-        res.status(201).send("Video added succesfully!");
-    }
+        let validation = checkValidLink(req.params.link);
+            if(validation === false){
+                res.status(201).send({status:"Invalid Link!"});
+            }
+            else{
+                let validatedId = validation;
+                await addVideo(validatedId,req.params.playlist,req.params.username);
+                res.status(201).send({status:"Video added succesfully!"});
+            }   
+        }
+        
     catch(error) {
         res.status(400).json({message: error.message});
     }
@@ -86,7 +94,7 @@ app.delete("/deletePlaylist/:username/:playlistId",async function(req,res){
 
     try{
         await deletePlaylist(req.params.username,req.params.playlistId);
-        res.status(201).send("Playlist deleted succesfully!");
+        res.status(201).send({status:"Playlist deleted succesfully!"});
     }
     catch(error){
         res.status(400).json({message: error.message});
@@ -99,7 +107,7 @@ app.delete("/deleteVideo/:username/:playlistId/:videoId",async function(req,res)
 
     try{
         await deleteVideo(req.params.username,req.params.playlistId,req.params.playlistId);
-        res.status(201).send("Video deleted succesfully!");
+        res.status(201).send({status:"Video deleted succesfully!"});
     }
     catch(error){
         res.status(400).json({message: error.message});
@@ -111,7 +119,7 @@ app.put("/updateTitle/:username/:playlistId/:videoId/:newTitle",async function(r
 
     try{
         await updateTitle(req.params.username,req.params.playlistId,req.params.videoId,req.params.newTitle);
-        res.status(201).send("Title updated succesfully!");
+        res.status(201).send({status:"Title updated succesfully!"});
     }
     catch(error){
         res.status(400).json({message: error.message});
@@ -123,7 +131,7 @@ app.put("/getOriginalTitle/:username/:playlistId/:videoId",async function(req,re
 
     try{
         await getOriginalTitle(req.params.username,req.params.playlistId,req.params.videoId);
-        res.status(201).send("Title updated succesfully!");
+        res.status(201).send({status:"Title updated succesfully!"});
     }
     catch(error){
         res.status(400).json({message: error.message});
