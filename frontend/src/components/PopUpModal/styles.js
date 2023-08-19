@@ -37,6 +37,7 @@ export const OkButton = styled.button`
     margin-bottom: 15px;
     :hover {
         transform: scale(1.05);
+        background-color: #206091;
     }
 
 `;

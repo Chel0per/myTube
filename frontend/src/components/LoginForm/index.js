@@ -18,14 +18,14 @@ const LoginForm = () => {
         let response = await fetch("http://localhost:3001/loginValidate/" + encodeURIComponent(values.user) + "/" + encodeURIComponent(values.password),{method:"GET"});
         let userData = await response.json();
 
-        if(userData.status=="Unvalid user"){
+        if(userData.status==="Unvalid user"){
             setUserSpan("Unvalid user");
             setUserBorder("0 0 3px red");
             setPasswordSpan("");
             setPasswordBorder("none");
             setUserSpanColor("red");
         }
-        else if(userData.status=="Incorrect password"){
+        else if(userData.status==="Incorrect password"){
             setPasswordSpan("Incorrect password");
             setUserSpan("Valid user");
             setUserBorder("0 0 3px green");
@@ -44,7 +44,7 @@ const LoginForm = () => {
                 <Header>MyTube</Header>
                     <UserDiv>
                         <UserLabel>User</UserLabel>
-                        <UserInput boxShadow={userBorder} onChange={(e) =>{
+                        <UserInput boxShadow={userBorder} maxLength={34} onChange={(e) =>{
                         const value = e.target.value;
                         setValues({
                             ...values,
@@ -55,7 +55,7 @@ const LoginForm = () => {
                     </UserDiv>
                     <PasswordDiv>
                         <PasswordLabel>Password</PasswordLabel>
-                        <PasswordInput type="password" boxShadow={passwordBorder} onChange={(e) =>{
+                        <PasswordInput type="password" boxShadow={passwordBorder} maxLength={34} onChange={(e) =>{
                         const value = e.target.value;
                         setValues({
                             ...values,

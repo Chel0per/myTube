@@ -7,8 +7,9 @@ const { deleteVideo } = require("../services/deleteVideo.js");
 const { updateTitle } = require("../services/updateTitle.js");
 const { getOriginalTitle } = require("../services/getOriginalTitle.js");
 const { checkValidLink } = require("../services/checkValidLink.js");
-const { checkPassword } = require("../services/checkPassword.js")
-const { getUser } = require("../services/getUser.js")
+const { checkPassword } = require("../services/checkPassword.js");
+const { getUser } = require("../services/getUser.js");
+const { addUser } = require("../services/addUser.js")
 
 const app = express();
 app.use(cors());
@@ -46,36 +47,30 @@ app.get("/getUser/:username", async function(req,res){
 
 })
 
-// app.get("/getAllItems",async function(req,res){
-    
-//     try{
-//         let Items = await getAllItems();
-//         res.send(Items);
-//     }
-//     catch(error){
-//         res.status(400).json({message: error.message}); 
-//     }
+app.post("/createUser/:username/:password",async function(req,res){
 
-// });
+    try {
+        let user = await getUser(req.params.username);
+        if(!user){
+            await addUser(req.params.username,req.params.password);
+            res.status(201).send({status:"User created succesfully!"});
+        }
+        else{
+            res.status(201).send({status:"Username already being used!"});
+        }
+    }
+    catch(error){
+        res.status(400).json({message: error.message});
+    }
 
-// app.get("/checkPlaylistEmpty/:playlist",async function(req,res){
-    
-//     try{
-//         let Empty = await checkPlaylistEmpty(req.params.playlist);
-//         res.send(Empty);
-//     }
-//     catch(error){
-//         res.status(400).json({message: error.message}); 
-//     }
-
-// });
+})
 
 app.post("/addVideo/:link/:playlist/:username",async function(req,res){
 
     try {
         let validation = checkValidLink(req.params.link);
             if(validation === false){
-                res.status(201).send({status:"Invalid Link!"});
+                res.status(201).send({status:"Invalid link!"});
             }
             else{
                 let validatedId = validation;

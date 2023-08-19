@@ -9,7 +9,7 @@ gap:0;
 display:flex;
 flex-direction:column;
 justify-content:start;
-
+height: 100vh;
 
 `;
 

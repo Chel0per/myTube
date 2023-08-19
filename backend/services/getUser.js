@@ -13,4 +13,3 @@ async function getUser(username){
 
 module.exports.getUser = getUser;
 
-// getUser("chel0per");

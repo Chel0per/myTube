@@ -1,6 +1,7 @@
 import React from "react";
-import {Container,SearchBar,Name,Logo,Photo,User,Box,Tag,My,Tube} from "./styles.js";
+import {Container,SearchBar,Name,Photo,User,Box,Tag} from "./styles.js";
 import { FaSearch } from "react-icons/fa";
+import Logo from "../Logo/index.js"
 import userLogo from "./logo.png"
 
 const Header = ({filter,setFilter,username,logoLink}) => {
@@ -9,10 +10,7 @@ const Header = ({filter,setFilter,username,logoLink}) => {
         
     return(
         <Container>
-            <Logo>
-                <My>My</My>
-                <Tube>Tube</Tube>
-            </Logo>
+            <Logo></Logo>
             <Box>
                 <SearchBar onChange={(e)=> setFilter(e.target.value)}></SearchBar>
                 {!shouldHideTag && <Tag><FaSearch /></Tag>}

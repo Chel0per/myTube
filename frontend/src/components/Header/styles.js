@@ -50,35 +50,6 @@ export const Tag = styled.i`
 
 `;
 
-
-
-export const Logo = styled.div`
-
-    display:flex;
-    flex-direction:row;
-    width:175px;
-    justify-content:center;
-    padding-left:50px;
-    object-fit:auto;
-
-`;
-
-export const My = styled.p`
-
-    color:red;
-    font-size:30px;
-    font-weight:500;
-
-`;
-
-export const Tube = styled.p`
-
-    font-size:30px;
-    font-weight:500;
-
-
-`;
-
 export const User = styled.div`
 
     display:flex;
