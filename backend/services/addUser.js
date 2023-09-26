@@ -8,6 +8,7 @@ async function addUser(username,password) {
         password:password,
         adminUser:false,
         daylyInsertions:0,
+        image:"https://ik.imagekit.io/incemyxfl/logo.png?updatedAt=1693459100150",
         playlists:[]
     };
 

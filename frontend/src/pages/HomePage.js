@@ -29,7 +29,7 @@ function HomePage() {
 	return (
     	<CSSReset>
 			<PopUpModal warning={warning} viewPopUp={viewPopUp} setViewPopUp={setViewPopUp}></PopUpModal>
-    		<Header setFilter={setFilter} filter={filter} username={userData.user}></Header>
+    		<Header setFilter={setFilter} filter={filter} username={userData.user} imageUrl={userData.image}></Header>
     		<Banner></Banner>
     		<PlaylistView playlists={userData.playlists} effectCount={effectCount} setEffect={setEffect} filter={filter} username={userData.user} setWarning={setWarning}></PlaylistView>
     	</CSSReset>

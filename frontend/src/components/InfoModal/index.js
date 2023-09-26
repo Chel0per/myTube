@@ -9,12 +9,12 @@ const InfoModal = ({showModal,setModal}) => {
     if(showModal) return(
         <Container>
             <ModalContainer>
-                <InfoTitle>Ovo cozido</InfoTitle>
+                <InfoTitle>MyTube</InfoTitle>
                 <CloseButton type="button" onClick={()=>setModal(false)}>&times;</CloseButton>
                 <InfoText>
-                    Como fazer um ovo cozido: peque uma panela e coloque água, coloque a panela no fogo
-                    e aquarde a água ferver, coloque o ovo na água fervente por 8 minutos. Depois retire
-                    ovo da água e tire a casca.
+                    This is a website used to make playlists of youtube videos. Just copy the url of the video and
+                    and type the name of the playlist. Create an account in the create account page and access 
+                    it in the login page. You can add 10 videos per day. hope you like it!
                 </InfoText>
                 <CreateAccountButton type="button" onClick={()=>navigate("/createUser")}>Create Account</CreateAccountButton>
             </ModalContainer>

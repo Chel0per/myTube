@@ -15,6 +15,8 @@ async function addVideo(id,playlist,username){
 
     const user = await User.findOne({user:username});
 
+    if(!user.adminUser) user.daylyInsertions++;
+
     const playlistNames = user.playlists.map((playlist) => playlist.name);
     
     if(playlistNames.indexOf(playlist) >= 0){       
@@ -27,6 +29,19 @@ async function addVideo(id,playlist,username){
         user.playlists.push(newPlaylist);
         const newVideo = new Video(object);
         user.playlists[user.playlists.length - 1].videos.push(newVideo);
+        user.playlists.sort((a, b) => {
+            const nameA = a.name.toUpperCase(); 
+            const nameB = b.name.toUpperCase(); 
+            if (nameA < nameB) {
+                return -1;
+            }
+            else if (nameA > nameB) {
+                return 1;
+            }
+            else{
+               return 0; 
+            }      
+        });
         await user.save();
     }
 
@@ -34,7 +49,5 @@ async function addVideo(id,playlist,username){
     mongoose.connection.deleteModel("playlist");
 
 }
-
-// addVideo("https://www.youtube.com/watch?v=FssULNGSZIA","Música","chel0per");
 
 module.exports.addVideo = addVideo;

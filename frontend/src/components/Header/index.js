@@ -2,9 +2,8 @@ import React from "react";
 import {Container,SearchBar,Name,Photo,User,Box,Tag} from "./styles.js";
 import { FaSearch } from "react-icons/fa";
 import Logo from "../Logo/index.js"
-import userLogo from "./logo.png"
 
-const Header = ({filter,setFilter,username,logoLink}) => {
+const Header = ({filter,setFilter,username,imageUrl}) => {
 
     let shouldHideTag = filter !== "";
         
@@ -16,7 +15,7 @@ const Header = ({filter,setFilter,username,logoLink}) => {
                 {!shouldHideTag && <Tag><FaSearch /></Tag>}
             </Box>
             <User>
-                <Photo src={userLogo}/>
+                <Photo src={imageUrl}/>
                 <Name>{username}</Name>
             </User>
         </Container>

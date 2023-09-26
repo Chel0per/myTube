@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
     password:String,
     adminUser:Boolean,
     daylyInsertions:Number,
-    image:Buffer,
+    image:String,
     playlists:[playlistSchema]
 
 });

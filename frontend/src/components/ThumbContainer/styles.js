@@ -12,8 +12,17 @@ export const Container = styled.div`
     width: 209px;
     height: 116px;
 
+    @keyframes delay-pointer-events {
+        100% {
+            pointer-events: auto;
+            cursor: pointer;
+        }
+    }
+
     :hover button {
-        display: block;
+        opacity: 1;
+        animation: delay-pointer-events 0.3s linear 0.3s;
+        animation-fill-mode: forwards;
     }
 
 `;
@@ -40,7 +49,7 @@ export const DeleteButton = styled.button`
     color: black;
     background-color: red;
     border: 1px solid black;
-    cursor: pointer;
+    cursor: default;
     font-size:21px;
     z-index: 3;
     padding-left: 0;
@@ -48,8 +57,10 @@ export const DeleteButton = styled.button`
     padding-top: 0;
     padding-bottom: 10px;
     text-align: center;
-    display:none
-    
+    opacity:0;
+    transition: opacity 0.3s ease-in;
+    pointer-events: none;
+     
 `;
 
 export const ModalButton = styled.button`
@@ -63,13 +74,15 @@ export const ModalButton = styled.button`
     color: black;
     background-color: red;
     border: 1px solid black;
-    cursor: pointer;
+    cursor: default;
     font-size:12px;
     z-index: 3;
     padding: 0;
     font-weight: bold;
     text-align: center;
-    display:none
+    opacity:0;
+    transition: opacity 0.3s ease-in;
+    pointer-events: none;
     
 `;
 
