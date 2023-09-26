@@ -17,6 +17,7 @@ const secrets = require("../secret.json")
 const app = express();
 app.use(cors());
 
+mongoose.set("strictQuery",false);
 const connectionString = "mongodb+srv://marcelosmarques7:" + secrets.cluster_password + "@clustermytube.0twkb1v.mongodb.net/mytubeDB";
 
 app.listen(3001,async() => {
