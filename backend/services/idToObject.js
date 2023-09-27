@@ -1,8 +1,8 @@
-let secret = require("../secret.json");
+require("dotenv").config();
 
 async function idToObject(id){
 
-    let apiUrl = secret.api_part1 + id + secret.api_part2 + secret.api_key;
+    let apiUrl = process.env.API_URL_1 + id + process.env.API_URL_2 + process.env.API_URL_KEY;
     
     let response = await fetch(apiUrl);
     let data = await response.json();

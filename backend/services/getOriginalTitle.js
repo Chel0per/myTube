@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const userSchema = require("../schemas/userSchema.js");
-const secret = require("../secret.json");
+require("dotenv").config();
 
 async function getOriginalTitle(username,playlistId,videoId) {
 
@@ -15,7 +15,7 @@ async function getOriginalTitle(username,playlistId,videoId) {
 
     let videoLink = user.playlists[playlistIndex].videos[videoIndex].link;
     let apiId = videoLink.slice(videoLink.length -11,videoLink.length);
-    let apiUrl = secret.api_part1 + apiId + secret.api_part2 + secret.api_key;
+    let apiUrl = process.env.API_URL_1 + apiId + process.env.API_URL_2 + process.env.API_URL_KEY;
 
     let response = await fetch(apiUrl);
     let data = await response.json();

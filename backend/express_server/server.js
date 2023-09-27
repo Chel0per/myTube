@@ -12,13 +12,13 @@ const { checkPassword } = require("../services/checkPassword.js");
 const { getUser } = require("../services/getUser.js");
 const { addUser } = require("../services/addUser.js");
 const { resetDaylyInsertions } = require("../services/resetDaylyInsertions.js");
-const secrets = require("../secret.json")
+require("dotenv").config();
 
 const app = express();
 app.use(cors());
 
 mongoose.set("strictQuery",false);
-const connectionString = "mongodb+srv://marcelosmarques7:" + secrets.cluster_password + "@clustermytube.0twkb1v.mongodb.net/mytubeDB";
+const connectionString = process.env.DB_URI;
 
 app.listen(3001,async() => {
     await mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -32,6 +32,12 @@ cron.schedule('0 0 * * *', () => {
     scheduled: true,
     timezone: "America/Sao_Paulo"
 });
+
+app.get("/", function (req,res){
+
+    res.send({status:"This definitelly is as API"})
+
+})
 
 app.get("/loginValidate/:username/:password", async function(req,res){
 
@@ -121,7 +127,7 @@ app.delete("/deletePlaylist/:username/:playlistId",async function(req,res){
 app.delete("/deleteVideo/:username/:playlistId/:videoId",async function(req,res){
 
     try{
-        await deleteVideo(req.params.username,req.params.playlistId,req.params.playlistId);
+        await deleteVideo(req.params.username,req.params.playlistId,req.params.videoId);
         res.status(201).send({status:"Video deleted succesfully!"});
     }
     catch(error){
