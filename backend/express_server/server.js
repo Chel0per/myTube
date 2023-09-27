@@ -17,10 +17,14 @@ require("dotenv").config();
 const app = express();
 app.use(cors());
 
+console.log("Trying to start the server");
+
 mongoose.set("strictQuery",false);
 const connectionString = process.env.DB_URI;
 
-app.listen(3001,async() => {
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT,async() => {
     await mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
     console.log("Server started on ClusterMyTube");
 });
@@ -35,7 +39,7 @@ cron.schedule('0 0 * * *', () => {
 
 app.get("/", function (req,res){
 
-    res.send({status:"This definitelly is as API"})
+    res.send({status:"This definitelly is an API"})
 
 })
 

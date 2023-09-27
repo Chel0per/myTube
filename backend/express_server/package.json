@@ -1,5 +1,5 @@
 {
-  "name": "y",
+  "name": "mytubeapi",
   "version": "1.0.0",
   "description": "express server",
   "main": "server.js",
@@ -12,6 +12,8 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "mongoose": "^7.5.3",
+    "node-cron": "^3.0.2"
   }
 }
