@@ -17,8 +17,6 @@ require("dotenv").config();
 const app = express();
 app.use(cors());
 
-console.log("Trying to start the server");
-
 mongoose.set("strictQuery",false);
 const connectionString = process.env.DB_URI;
 
@@ -90,6 +88,8 @@ app.post("/createUser/:username/:password",async function(req,res){
 })
 
 app.post("/addVideo/:link/:playlist/:username",async function(req,res){
+
+    console.log(req.params.link);
 
     try {
         let validation = checkValidLink(req.params.link);

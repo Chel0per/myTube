@@ -15,7 +15,7 @@ const LoginForm = () => {
 
     async function handleLoginSubmit(){
 
-        let response = await fetch("http://localhost:3001/loginValidate/" + encodeURIComponent(values.user) + "/" + encodeURIComponent(values.password),{method:"GET"});
+        let response = await fetch("https://mytube.cyclic.app/loginValidate/" + encodeURIComponent(values.user) + "/" + encodeURIComponent(values.password),{method:"GET"});
         let userData = await response.json();
 
         if(userData.status==="Unvalid user"){

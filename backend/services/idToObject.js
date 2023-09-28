@@ -2,7 +2,7 @@ require("dotenv").config();
 
 async function idToObject(id){
 
-    let apiUrl = process.env.API_URL_1 + id + process.env.API_URL_2 + process.env.API_URL_KEY;
+    let apiUrl = "https://www.googleapis.com/youtube/v3/videos?part=snippet&id=" + id + "&fields=items(id%2Csnippet)&key=" + process.env.API_URL_KEY;
     
     let response = await fetch(apiUrl);
     let data = await response.json();
