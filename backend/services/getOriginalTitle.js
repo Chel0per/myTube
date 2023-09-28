@@ -15,7 +15,7 @@ async function getOriginalTitle(username,playlistId,videoId) {
 
     let videoLink = user.playlists[playlistIndex].videos[videoIndex].link;
     let apiId = videoLink.slice(videoLink.length -11,videoLink.length);
-    let apiUrl = process.env.API_URL_1 + apiId + process.env.API_URL_2 + process.env.API_URL_KEY;
+    let apiUrl = "https://www.googleapis.com/youtube/v3/videos?part=snippet&id=" + apiId + "&fields=items(id%2Csnippet)&key=" + process.env.API_URL_KEY;
 
     let response = await fetch(apiUrl);
     let data = await response.json();
