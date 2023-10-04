@@ -16,7 +16,15 @@ const CreateUserForm = ({setWarning,setViewPopUp})=>{
             setViewPopUp(true);
         }
         else{
-            let response = await fetch("http://localhost:3001/createUser/" + encodeURIComponent(values.username) + "/" + encodeURIComponent(values.password),{method:"POST"});
+            let requestBody = {
+                username:inputValues.username,
+                password:inputValues.password
+            }
+            let response = await fetch("http://localhost:3001/createUser",{
+                method:"POST",
+                headers: {"Content-Type":"application/json"},
+                body:JSON.stringify(requestBody)
+            });
             let object = await response.json();
 
             setWarning(object.status);

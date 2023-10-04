@@ -27,7 +27,12 @@ const ThumbContainer = ({ src,link,username,id,playlistId,setEffect,effectCount,
                 <TitleInput placeholder="Type the new title" onChange={(e) => setNewTitle(e.target.value)}></TitleInput>
                 <ButtonsRow>
                     <UpdateButton onClick={async() => {
-                        let response = await fetch("http://localhost:3001/updateTitle/" + encodeURIComponent(username) +"/"+ encodeURIComponent(playlistId) +"/" + encodeURIComponent(id) + "/" + newTitle,{method:"PUT"});
+                        let requestBody = { newTitle:newTitle};
+                        let response = await fetch("http://localhost:3001/updateTitle/" + encodeURIComponent(username) +"/"+ encodeURIComponent(playlistId) +"/" + encodeURIComponent(id),{
+                            method:"PUT",
+                            headers: {"Content-Type":"application/json"},
+                            body:JSON.stringify(requestBody)
+                        });
                         let data = await response.json();
                         setWarning(data.status);
                         setEffect(effectCount + 1);

@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const md5 = require("md5");
 const cron = require("node-cron");
 const mongoose = require("mongoose");
 const { addVideo } = require("../services/addVideo.js");
@@ -8,23 +9,25 @@ const { deleteVideo } = require("../services/deleteVideo.js");
 const { updateTitle } = require("../services/updateTitle.js");
 const { getOriginalTitle } = require("../services/getOriginalTitle.js");
 const { checkValidLink } = require("../services/checkValidLink.js");
-const { checkPassword } = require("../services/checkPassword.js");
 const { getUser } = require("../services/getUser.js");
+const { getUserHash } = require("../services/getUserHash.js");
 const { addUser } = require("../services/addUser.js");
 const { resetDaylyInsertions } = require("../services/resetDaylyInsertions.js");
 require("dotenv").config();
 
 const app = express();
 app.use(cors());
+app.use(express.json());
 
-mongoose.set("strictQuery",false);
 const connectionString = process.env.DB_URI;
 
 const PORT = process.env.PORT || 3001;
 
-app.listen(PORT,async() => {
-    await mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
-    console.log("Server started on ClusterMyTube");
+mongoose.connect(connectionString).then( () =>{
+    console.log("Connected to MongoDB");
+    app.listen(PORT, async () => {   
+        console.log(`Server started on port ${PORT}`);
+    });
 });
 
 cron.schedule('0 0 * * *', () => {
@@ -41,13 +44,14 @@ app.get("/", function (req,res){
 
 })
 
-app.get("/loginValidate/:username/:password", async function(req,res){
+app.post("/loginValidate/:username", async function(req,res){
 
     try{
         let user = await getUser(req.params.username);
-        if(user === null) res.send({status:"Unvalid user"});
+        if(!user) res.send({status:"Unvalid user"});
         else{
-            if(!checkPassword(user,req.params.password)) res.send({status:"Incorrect password"});
+            let hash = await getUserHash(req.params.username);
+            if(hash !== md5(req.body.password)) res.send({status:"Incorrect password"});
             else res.send(user);
         }
     }
@@ -59,7 +63,7 @@ app.get("/loginValidate/:username/:password", async function(req,res){
 
 app.get("/getUser/:username", async function(req,res){
 
-    try{
+    try{;
         let user = await getUser(req.params.username);
         res.send(user);
     }
@@ -69,12 +73,12 @@ app.get("/getUser/:username", async function(req,res){
 
 })
 
-app.post("/createUser/:username/:password",async function(req,res){
+app.post("/createUser",async function(req,res){
 
     try {
-        let user = await getUser(req.params.username);
+        let user = await getUser(req.body.username);
         if(!user){
-            await addUser(req.params.username,req.params.password);
+            await addUser(req.body.username,md5(req.body.password));
             res.status(201).send({status:"User created succesfully!"});
         }
         else{
@@ -87,23 +91,21 @@ app.post("/createUser/:username/:password",async function(req,res){
 
 })
 
-app.post("/addVideo/:link/:playlist/:username",async function(req,res){
-
-    console.log(req.params.link);
+app.post("/addVideo",async function(req,res){
 
     try {
-        let validation = checkValidLink(req.params.link);
+        let validation = checkValidLink(req.body.link);
             if(validation === false){
                 res.status(201).send({status:"Invalid link!"});
             }
             else{
                 let validatedId = validation;
-                let user = await getUser(req.params.username);
+                let user = await getUser(req.body.username);
                 if(user.daylyInsertions >= 10){
                     res.status(201).send({status:"Max dayly insertions reached!"});
                 }
                 else{
-                    await addVideo(validatedId,req.params.playlist,req.params.username);
+                    await addVideo(validatedId,req.body.playlist,user);
                     res.status(201).send({status:"Video added succesfully!"});
                 }
             }   
@@ -140,10 +142,10 @@ app.delete("/deleteVideo/:username/:playlistId/:videoId",async function(req,res)
     
 });
 
-app.put("/updateTitle/:username/:playlistId/:videoId/:newTitle",async function(req,res){
+app.put("/updateTitle/:username/:playlistId/:videoId",async function(req,res){
 
     try{
-        await updateTitle(req.params.username,req.params.playlistId,req.params.videoId,req.params.newTitle);
+        await updateTitle(req.params.username,req.params.playlistId,req.params.videoId,req.body.newTitle);
         res.status(201).send({status:"Title updated succesfully!"});
     }
     catch(error){

@@ -22,7 +22,16 @@ const AddVideoForm = ({formVisible,close,setFormVisible,setEffect,effectCount,us
                             playlistName:value,
                     })}}></StyledInput>
                 <SubmitButton type="button" onClick={async ()=>{
-                    let response = await fetch("https://mytube.cyclic.app/addVideo/" + encodeURIComponent(values.url) + "/" + encodeURIComponent(values.playlistName) + "/" + encodeURIComponent(username),{method:"POST"});
+                    let requestBody = {
+                        link:values.url,
+                        playlist:values.playlistName,
+                        username:username
+                    };
+                    let response = await fetch("http://localhost:3001/addVideo",{
+                        method:"POST",
+                        headers: {"Content-Type":"application/json"},
+                        body:JSON.stringify(requestBody)
+                    });
                     let data = await response.json();
                     setFormVisible(false);
                     setWarning(data.status);

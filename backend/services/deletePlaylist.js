@@ -1,11 +1,9 @@
 const mongoose = require("mongoose");
-const userSchema = require("../schemas/userSchema.js");
+const { getUser } = require("./getUser.js");
 
 async function deletePlaylist(username,id){
     
-    const User = mongoose.model("user", userSchema,"users");
-
-    const user = await User.findOne({user:username});
+    const user = await getUser(username);
 
     let playlistIndex = user.playlists.findIndex((playlist) => playlist._id.toString() === id);
     

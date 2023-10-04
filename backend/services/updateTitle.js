@@ -1,11 +1,9 @@
 const mongoose = require("mongoose");
-const userSchema = require("../schemas/userSchema");
+const { getUser } = require("./getUser");
 
 async function updateTitle(username,playlistId,videoId,newTitle) {
 
-    const User = mongoose.model("user", userSchema,"users");
-
-    const user = await User.findOne({user:username});
+    const user = await getUser(username);
 
     let playlistIndex = user.playlists.findIndex((playlist) => playlist._id.toString() === playlistId);
     let playlist = user.playlists[playlistIndex];

@@ -2,18 +2,13 @@ const mongoose = require("mongoose");
 const { idToObject } = require("./idToObject.js");
 const videoSchema = require("../schemas/videoSchema.js");
 const playlistSchema = require("../schemas/playlistSchema.js");
-const userSchema = require("../schemas/userSchema.js")
 
-async function addVideo(id,playlist,username){ 
+async function addVideo(id,playlist,user){ 
     
     const object = await idToObject(id);
 
     const Video = mongoose.model("video",videoSchema,"videos");
     const Playlist = mongoose.model("playlist",playlistSchema,"playlists");
-    
-    const User = mongoose.model("user", userSchema,"users");
-
-    const user = await User.findOne({user:username});
 
     if(!user.adminUser) user.daylyInsertions++;
 
