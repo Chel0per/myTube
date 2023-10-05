@@ -8,7 +8,7 @@ const PlaylistContainer = ({filter,username,title,playlist,effectCount,setEffect
             <TitleContainer>
                 <Title>{title}</Title>
                 <DeleteButton onClick={ async()=> {
-                    let response = await fetch("http://localhost:3001/deletePlaylist/" + encodeURIComponent(username) + "/" + encodeURIComponent(playlistId),{method:"DELETE"});
+                    let response = await fetch("https://mytube.cyclic.app/deletePlaylist/" + encodeURIComponent(username) + "/" + encodeURIComponent(playlistId),{method:"DELETE"});
                     let data = await response.json();
                     setWarning(data.status);
                     setEffect(effectCount+1);

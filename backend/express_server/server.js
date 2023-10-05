@@ -120,8 +120,13 @@ app.post("/addVideo",async function(req,res){
 app.delete("/deletePlaylist/:username/:playlistId",async function(req,res){
 
     try{
-        await deletePlaylist(req.params.username,req.params.playlistId);
-        res.status(201).send({status:"Playlist deleted succesfully!"});
+        if(await deletePlaylist(req.params.username,req.params.playlistId)){
+            res.status(201).send({status:"Playlist deleted succesfully!"});
+        }
+        else
+        {
+            res.status(201).send({status:"Playlist not found!"});
+        }
     }
     catch(error){
         res.status(400).json({message: error.message});
@@ -133,8 +138,13 @@ app.delete("/deletePlaylist/:username/:playlistId",async function(req,res){
 app.delete("/deleteVideo/:username/:playlistId/:videoId",async function(req,res){
 
     try{
-        await deleteVideo(req.params.username,req.params.playlistId,req.params.videoId);
-        res.status(201).send({status:"Video deleted succesfully!"});
+        if(await deleteVideo(req.params.username,req.params.playlistId,req.params.videoId)){
+            res.status(201).send({status:"Video deleted succesfully!"});
+        }
+        else
+        {
+            res.status(201).send({status:"Video not found!"});
+        }
     }
     catch(error){
         res.status(400).json({message: error.message});
@@ -152,7 +162,7 @@ app.put("/updateTitle/:username/:playlistId/:videoId",async function(req,res){
         res.status(400).json({message: error.message});
     }
 
-})
+});
 
 app.put("/getOriginalTitle/:username/:playlistId/:videoId",async function(req,res){
 
@@ -164,4 +174,16 @@ app.put("/getOriginalTitle/:username/:playlistId/:videoId",async function(req,re
         res.status(400).json({message: error.message});
     }
 
-})
+});
+
+app.post("/resetDaylyInsertions",async function(req,res){
+
+    try{
+        await resetDaylyInsertions();
+        res.status(201).send({status:"Dayly Insertions Reseted!"});
+    }
+    catch(error){
+        res.status(400).json({message: error.message});
+    }
+
+});

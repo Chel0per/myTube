@@ -20,7 +20,7 @@ const CreateUserForm = ({setWarning,setViewPopUp})=>{
                 username:inputValues.username,
                 password:inputValues.password
             }
-            let response = await fetch("http://localhost:3001/createUser",{
+            let response = await fetch("https://mytube.cyclic.app/createUser",{
                 method:"POST",
                 headers: {"Content-Type":"application/json"},
                 body:JSON.stringify(requestBody)

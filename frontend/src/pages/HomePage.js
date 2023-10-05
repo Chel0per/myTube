@@ -18,7 +18,7 @@ function HomePage() {
 
 	useEffect(() => {
 		const loadPlaylists = async () => {
-				const response = await fetch("http://localhost:3001/getUser/"+encodeURIComponent(userData.user));
+				const response = await fetch("https://mytube.cyclic.app/getUser/"+encodeURIComponent(userData.user));
       			const result = await response.json();
       			setUserData(result);
 				setViewPopUp(true);								

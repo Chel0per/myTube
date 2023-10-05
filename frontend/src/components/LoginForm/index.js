@@ -17,7 +17,7 @@ const LoginForm = () => {
 
         let requestBody = {password:values.password};
 
-        let response = await fetch("http://localhost:3001/loginValidate/" + encodeURIComponent(values.user),{
+        let response = await fetch("https://mytube.cyclic.app/loginValidate/" + encodeURIComponent(values.user),{
             method:"POST",
             headers: {"Content-Type":"application/json"},
             body:JSON.stringify(requestBody)
