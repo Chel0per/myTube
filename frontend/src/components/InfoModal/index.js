@@ -12,7 +12,7 @@ const InfoModal = ({showModal,setModal}) => {
                 <InfoTitle>MyTube</InfoTitle>
                 <CloseButton type="button" onClick={()=>setModal(false)}>&times;</CloseButton>
                 <InfoText>
-                    This is a website used to make playlists of youtube videos. Just copy the url of the video and
+                    This is a website used to make playlists of youtube videos. Just copy the url of the video 
                     and type the name of the playlist. Create an account in the create account page and access 
                     it in the login page. You can add 10 videos per day. hope you like it!
                 </InfoText>
