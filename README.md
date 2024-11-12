@@ -1,7 +1,7 @@
 # myTube
 
 This is a project i made to learn the React, Express and Mongoose frameworks. It is a youtube video playlist maker where i have a simple page
-that is able to do CRUD operations with a mongoDB database. You can access the site in this link https://my-tubee.vercel.app/home.
+that is able to do CRUD operations with a mongoDB database. You can access the site in this link https://my-tubee.vercel.app.
 
 When you click in the link you will be directed to the login page
 
