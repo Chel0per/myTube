@@ -19,11 +19,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const connectionString = process.env.DB_URI;
+// Database connection
+// const connectionString = process.env.DB_URI;
 
 const PORT = process.env.PORT || 3001;
 
-mongoose.connect(connectionString).then( () =>{
+mongoose.connect("mongodb://127.0.0.1:27017/mytubeusersDB").then( () =>{
     console.log("Connected to MongoDB");
     app.listen(PORT, async () => {   
         console.log(`Server started on port ${PORT}`);
@@ -82,7 +83,7 @@ app.post("/createUser",async function(req,res){
             res.status(201).send({status:"User created succesfully!"});
         }
         else{
-            res.status(201).send({status:"Username already being used!"});
+            res.status(400).send({status:"Username already being used!"});
         }
     }
     catch(error){
@@ -96,13 +97,13 @@ app.post("/addVideo",async function(req,res){
     try {
         let validation = checkValidLink(req.body.link);
             if(validation === false){
-                res.status(201).send({status:"Invalid link!"});
+                res.status(400).send({status:"Invalid link!"});
             }
             else{
                 let validatedId = validation;
                 let user = await getUser(req.body.username);
                 if(user.daylyInsertions >= 10){
-                    res.status(201).send({status:"Max dayly insertions reached!"});
+                    res.status(400).send({status:"Max dayly insertions reached!"});
                 }
                 else{
                     await addVideo(validatedId,req.body.playlist,user);
@@ -125,7 +126,7 @@ app.delete("/deletePlaylist/:username/:playlistId",async function(req,res){
         }
         else
         {
-            res.status(201).send({status:"Playlist not found!"});
+            res.status(400).send({status:"Playlist not found!"});
         }
     }
     catch(error){
@@ -143,7 +144,7 @@ app.delete("/deleteVideo/:username/:playlistId/:videoId",async function(req,res)
         }
         else
         {
-            res.status(201).send({status:"Video not found!"});
+            res.status(400).send({status:"Video not found!"});
         }
     }
     catch(error){

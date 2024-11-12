@@ -9,7 +9,7 @@ const Header = ({filter,setFilter,username,imageUrl}) => {
         
     return(
         <Container>
-            <Logo></Logo>
+            <Logo className="logo"></Logo>
             <Box>
                 <SearchBar onChange={(e)=> setFilter(e.target.value)}></SearchBar>
                 {!shouldHideTag && <Tag><FaSearch /></Tag>}

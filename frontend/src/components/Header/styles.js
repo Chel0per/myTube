@@ -9,7 +9,43 @@ export const Container = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding: 0 40px;
     align-items: center;
+    box-sizing: border-box;
+
+    @media (max-width: 600px) {
+
+        padding: 0 30px;
+
+        .sc-cMlaQw {
+
+            flex-direction: column;
+            width:50px;
+            
+            p {
+                font-size: 24px;
+            }
+
+        }
+
+    }
+
+    @media (max-width: 350px) {
+
+    padding: 0 15px;
+
+    .sc-cMlaQw {
+
+        flex-direction: column;
+        width:50px;
+        
+        p {
+            font-size: 24px;
+        }
+
+    }
+
+    }
 
 `
 
@@ -27,6 +63,15 @@ export const SearchBar = styled.input`
     color: #222222;
     outline: none;
     transition: .5s;
+    box-sizing: border-box;
+
+    @media (max-width: 600px) {
+
+        width:160px;
+        height: 50px;
+        font-size: 14px;
+
+    }
 
 `;
 
@@ -46,7 +91,11 @@ export const Tag = styled.i`
     color: #222222;
     transition: .4s;
 
-    
+    @media (max-width: 600px) {
+
+        font-size: 15px;
+
+    }
 
 `;
 
@@ -58,9 +107,14 @@ export const User = styled.div`
     justify-content:center;
     height:100px;
     width:175px;
-    padding-right:50px;
-    gap:10px
+    gap:10px;
+    box-sizing: border-box;
 
+    @media (max-width: 600px) {
+
+        width: 50px;
+
+    }
 
 `;
 

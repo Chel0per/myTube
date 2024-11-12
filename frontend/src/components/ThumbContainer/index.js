@@ -12,7 +12,7 @@ const ThumbContainer = ({ src,link,username,id,playlistId,setEffect,effectCount,
         <Container>
             <Clickable href={link}><Thumb src={src}></Thumb></Clickable>
             <DeleteButton onClick={async() => {
-                let response = await fetch("https://mytube.cyclic.app/deleteVideo/" + encodeURIComponent(username) +"/"+ encodeURIComponent(playlistId) +"/" + encodeURIComponent(id),{method:"DELETE"});
+                let response = await fetch("http://localhost:3001/deleteVideo/" + encodeURIComponent(username) +"/"+ encodeURIComponent(playlistId) +"/" + encodeURIComponent(id),{method:"DELETE"});
                 let data = await response.json();
                 setWarning(data.status);
                 setEffect(effectCount + 1);

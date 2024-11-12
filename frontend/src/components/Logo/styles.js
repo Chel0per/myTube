@@ -24,7 +24,7 @@ export const Container = styled.div`
     flex-direction:row;
     width:175px;
     justify-content:center;
-    padding-left:50px;
     object-fit:auto;
+    box-sizing: border-box;
 
 `;
