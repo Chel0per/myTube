@@ -27,7 +27,7 @@ const AddVideoForm = ({formVisible,close,setFormVisible,setEffect,effectCount,us
                         playlist:values.playlistName,
                         username:username
                     };
-                    let response = await fetch("http://localhost:3001/addVideo",{
+                    let response = await fetch("https://my-tube-api.vercel.app/addVideo",{
                         method:"POST",
                         headers: {"Content-Type":"application/json"},
                         body:JSON.stringify(requestBody)

@@ -20,7 +20,7 @@ const LoginForm = () => {
         //  production api key
         // "https://mytube.cyclic.app/loginValidate/"
 
-        let response = await fetch("http://localhost:3001/loginValidate/" + encodeURIComponent(values.user),{
+        let response = await fetch("https://my-tube-api.vercel.app/loginValidate/" + encodeURIComponent(values.user),{
             method:"POST",
             headers: {"Content-Type":"application/json"},
             body:JSON.stringify(requestBody)

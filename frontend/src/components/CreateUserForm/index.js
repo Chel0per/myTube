@@ -6,7 +6,7 @@ const CreateUserForm = ({setWarning,setViewPopUp})=>{
     
     const [inputValues,setInputValues] = useState({});
 
-    async function handleLoginSubmit(values){
+    async function handleUserCreationSubmit(values){
         if(values.username.length === 0){
             setWarning("You must type an username");
             setViewPopUp(true);
@@ -20,7 +20,7 @@ const CreateUserForm = ({setWarning,setViewPopUp})=>{
                 username:inputValues.username,
                 password:inputValues.password
             }
-            let response = await fetch("https://mytube.cyclic.app/createUser",{
+            let response = await fetch("https://my-tube-api.vercel.app/createUser",{
                 method:"POST",
                 headers: {"Content-Type":"application/json"},
                 body:JSON.stringify(requestBody)
@@ -51,7 +51,7 @@ const CreateUserForm = ({setWarning,setViewPopUp})=>{
                 <ConfirmPasswordLabel>Confirm Password</ConfirmPasswordLabel>
                 <ConfirmPasswordInput type="password" maxLength={34} onChange={(e)=>setInputValues({...inputValues, cPassword:e.target.value})}></ConfirmPasswordInput>
             </ConfirmPasswordDiv>
-            <CreateAccount onClick={()=>handleLoginSubmit(inputValues)}>Create account</CreateAccount>
+            <CreateAccount onClick={()=>handleUserCreationSubmit(inputValues)}>Create account</CreateAccount>
         </Container>
     )
 }

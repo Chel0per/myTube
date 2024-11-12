@@ -10,7 +10,7 @@ const ConfirmationModal = ({viewConfirmationModal,setConfirmationModal,username,
                     <ButtonSection>
                         <AcceptButton onClick={ async()=> {
                             setConfirmationModal(false);
-                            let response = await fetch("http://localhost:3001/deletePlaylist/" + encodeURIComponent(username) + "/" + encodeURIComponent(playlistId),{method:"DELETE"});
+                            let response = await fetch("https://my-tube-api.vercel.app/deletePlaylist/" + encodeURIComponent(username) + "/" + encodeURIComponent(playlistId),{method:"DELETE"});
                             let data = await response.json();
                             setWarning(data.status);
                             setEffect(effectCount+1);

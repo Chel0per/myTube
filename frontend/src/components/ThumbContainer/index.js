@@ -12,7 +12,7 @@ const ThumbContainer = ({ src,link,username,id,playlistId,setEffect,effectCount,
         <Container>
             <Clickable href={link}><Thumb src={src}></Thumb></Clickable>
             <DeleteButton onClick={async() => {
-                let response = await fetch("http://localhost:3001/deleteVideo/" + encodeURIComponent(username) +"/"+ encodeURIComponent(playlistId) +"/" + encodeURIComponent(id),{method:"DELETE"});
+                let response = await fetch("https://my-tube-api.vercel.app/deleteVideo/" + encodeURIComponent(username) +"/"+ encodeURIComponent(playlistId) +"/" + encodeURIComponent(id),{method:"DELETE"});
                 let data = await response.json();
                 setWarning(data.status);
                 setEffect(effectCount + 1);
@@ -28,7 +28,7 @@ const ThumbContainer = ({ src,link,username,id,playlistId,setEffect,effectCount,
                 <ButtonsRow>
                     <UpdateButton onClick={async() => {
                         let requestBody = { newTitle:newTitle};
-                        let response = await fetch("https://mytube.cyclic.app/updateTitle/" + encodeURIComponent(username) +"/"+ encodeURIComponent(playlistId) +"/" + encodeURIComponent(id),{
+                        let response = await fetch("https://my-tube-api.vercel.app/updateTitle/" + encodeURIComponent(username) +"/"+ encodeURIComponent(playlistId) +"/" + encodeURIComponent(id),{
                             method:"PUT",
                             headers: {"Content-Type":"application/json"},
                             body:JSON.stringify(requestBody)
@@ -39,7 +39,7 @@ const ThumbContainer = ({ src,link,username,id,playlistId,setEffect,effectCount,
                         setViewThumbModal("Thumb");
                     }}>Update</UpdateButton>
                     <OriginalButton onClick={async() => {
-                        let response = await fetch("https://mytube.cyclic.app/getOriginalTitle/" + encodeURIComponent(username) +"/"+ encodeURIComponent(playlistId) +"/" + encodeURIComponent(id),{method:"PUT"});
+                        let response = await fetch("https://my-tube-api.vercel.app/getOriginalTitle/" + encodeURIComponent(username) +"/"+ encodeURIComponent(playlistId) +"/" + encodeURIComponent(id),{method:"PUT"});
                         let data = await response.json();
                         setWarning(data.status);
                         setEffect(effectCount + 1);
