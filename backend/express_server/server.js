@@ -19,12 +19,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Database connection
-// const connectionString = process.env.DB_URI;
+const connectionString = process.env.DB_URI;
 
 const PORT = process.env.PORT || 3001;
 
-mongoose.connect("mongodb://127.0.0.1:27017/mytubeusersDB").then( () =>{
+mongoose.connect(connectionString).then( () =>{
     console.log("Connected to MongoDB");
     app.listen(PORT, async () => {   
         console.log(`Server started on port ${PORT}`);
@@ -188,3 +187,5 @@ app.post("/resetDaylyInsertions",async function(req,res){
     }
 
 });
+
+module.exports = app;
