@@ -14,6 +14,10 @@ export const Container = styled.div`
     background-color: white;
     display:flex;
     flex-direction: column;
+
+    @media (max-width: 520px) {
+        width:280px
+    }
     
 `;
 
