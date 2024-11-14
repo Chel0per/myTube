@@ -1,5 +1,5 @@
 const { resetDaylyInsertions } = require("../services/resetDaylyInsertions.js");
 
-export default function () {
+export default async function () {
     resetDaylyInsertions();
 }
